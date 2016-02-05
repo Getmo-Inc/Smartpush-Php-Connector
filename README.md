@@ -29,6 +29,16 @@ $push = new Push(string $devid, string $when = 'now', string $alias = '');
 ```
 > The seconds and thirth parameters are options. The ```$when``` parameter can handle this entry models: 'now', '0000-00-00 00:00:00', '00/00/000 00:00:00', or a valida UNIX timestamp. The ```$alias``` sets a custom name for this Push Notification, so you can track it later on admin.getmo.com.br.
 
+
+### Method: setEnvironment()
+---
+**Description**: (Optional) Set the environment you want to use to sent this Push Notification. **Example**:
+```php
+$push->setEnvironment(string $env = '1');
+```
+> This method is optional. If you dont set the environment, the lib will guess you choose ```production```. If you want to use ```sandbox```, use this method with $env = '0'.
+
+
 ### Method: addNotification()
 ---
 **Description**: Add a notification to the Push payload. **Example**:
