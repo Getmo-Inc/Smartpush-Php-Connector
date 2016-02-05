@@ -11,7 +11,8 @@ class Examples
         $push = new Push('CN6Z8Eka3FSQ9IA');
         $push->addNotification('000000000000001', 'ANDROID', $this->getParams());
         $push->addTag('DEVICE_UUID', '353317056832026');
-        $data = $push->send();
+        $push->send();
+        $data = $push->getData();
 
         var_dump($data);
     }

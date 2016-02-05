@@ -30,7 +30,7 @@ class Push
         return $this;
     }
 
-    public function setEnvironment($env = 'prod')
+    public function setEnvironment($env = '1')
     {
         $this->prod = in_array($env, ['1', 'prod', 'production']) ? 1 : 0;
 
