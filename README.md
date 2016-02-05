@@ -9,7 +9,7 @@ composer require getmo/smartpush-php-connector
 ```
 
 ## Platforms
-Use one of the these platforms when you see ```platform``` on the docs above.
+Use one of the these platforms when you see ```$platform``` on the docs above.
 ```php
 $platforms = ['iOS', 'ANDROID', 'WINDOWS', 'CHROME', 'SAFARI', 'FIREFOX'];
 ```
@@ -26,8 +26,9 @@ use Smartpush\Push;
 **Description**: Create a new push instance.\
 **Example**:
 ```php
-$push = new Push('devid');
+$push = new Push(string $devid, string $when = 'now', string $alias = '');
 ```
+> Note: The seconds and thirth parameters are options. The ```$when``` parameter can handle this entry models: 'now', '0000-00-00 00:00:00', '00/00/000 00:00:00', or a valida UNIX timestamp. The ```$alias``` sets a custom name for this Push Notification, so you can track it later on admin.getmo.com.br.
 
 ### Method: addNotification()
 ---
@@ -50,6 +51,6 @@ $push->addTag(string $key, string $value);
 # or
 $push->addTag(string $key, string $operator, string $value);
 ```
-> Note: If you suppress the ```$operator```parameter the lib will guess you want to ```Equal``` (=) this entry. The complete list of operator you find in the REST API docs.
+> Note: The thirth parameter is optional. If you suppress the ```$operator``` parameter the lib will guess you want to ```Equal``` (=) this entry. The complete list of operator you find out in the REST API docs.
 
 Documentation in progress... See the examples folder!
