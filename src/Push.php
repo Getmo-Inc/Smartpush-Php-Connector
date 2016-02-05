@@ -44,7 +44,11 @@ class Push
         }
 
         if (!is_object($params)) {
-            return false;
+            if (is_array($params)) {
+                $params = json_decode(json_encode($params));
+            } else {
+                return false;
+            }
         }
 
         $notification = new stdClass;
