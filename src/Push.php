@@ -39,7 +39,7 @@ class Push
 
     public function addNotification($appid, $platform, $params)
     {
-        if (!in_array($platform, ['iOS', 'ANDROID', 'WINDOWS'])) {
+        if (!in_array($platform, ['iOS', 'ANDROID', 'WINDOWS', 'CHROME', 'SAFARI', 'FIREFOX'])) {
             return false;
         }
 
