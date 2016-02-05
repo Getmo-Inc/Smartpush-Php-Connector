@@ -23,8 +23,7 @@ use Smartpush\Push;
 
 #### Class: Push
 ---
-**Description**: Create a new push instance.\
-**Example**:
+**Description**: Create a new push instance. **Example**:
 ```php
 $push = new Push(string $devid, string $when = 'now', string $alias = '');
 ```
@@ -32,8 +31,7 @@ $push = new Push(string $devid, string $when = 'now', string $alias = '');
 
 ### Method: addNotification()
 ---
-**Description**: Add a notification to the Push payload.\
-**Example**:
+**Description**: Add a notification to the Push payload. **Example**:
 ```php
 $push->addNotification(string $appid, string $platform, array $params);
 # or
@@ -44,8 +42,7 @@ $push->addNotification(string $appid, string $platform, object $params);
 
 ### Method: addTag()
 ---
-**Description**: Add a Tag to filter the Push Notification.\
-**Example**:
+**Description**: Add a Tag to filter the Push Notification. **Example**:
 ```php
 $push->addTag(string $key, string $value);
 # or
