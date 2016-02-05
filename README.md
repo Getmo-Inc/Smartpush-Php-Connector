@@ -37,7 +37,7 @@ $push->addNotification(string $appid, string $platform, array $params);
 # or
 $push->addNotification(string $appid, string $platform, object $params);
 ```
-> The type of the thirth parameter, **params**, must be an ```array``` or an ```object``` (If you pass in an array the lib turn it into an object). The content schema variates according the platform. Consult the REST API docs to obtain the correct schema for the platform that you want to target.
+> The thirth parameter, **$params**, must be an ```array``` or an ```object``` (If you pass in an array the lib will turn it into an object). The content schema variates according the platform. Consult the REST API docs to obtain the correct schema for the platform that you want to target.
 
 
 ### Method: addTag()
