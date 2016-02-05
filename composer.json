@@ -1,0 +1,24 @@
+{
+  "name": "getmo/smartpush-php-connector",
+  "type": "library",
+  "description": "Php library to connect with Smartpush API services",
+  "keywords": ["smartpush", "php", "push", "notification", "api", "saas", "service"],
+  "homepage": "https://github.com/Getmo-Inc/Smartpush-Php-Connector",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jonathan Martins",
+      "email": "webmaster@getmo.com.br",
+      "homepage": "http://www.getmo.com.br/",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.9"
+  },
+  "autoload": {
+    "psr-4": {
+      "Smartpush\\": "src/"
+    }
+  }
+}
