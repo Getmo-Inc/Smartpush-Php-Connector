@@ -120,12 +120,12 @@ class Push
 
     public function getPushInfo($pushid)
     {
-        return $this->get('/'.$this->devid.'/'.$pushid);
+        return $this->get('/push/'.$this->devid.'/'.$pushid);
     }
 
     public function cancelPush($pushid)
     {
-        return $this->put('/'.$this->devid.'/'.$pushid.'/cancel');
+        return $this->put('/push/'.$this->devid.'/'.$pushid.'/cancel');
     }
 
     private function validate()

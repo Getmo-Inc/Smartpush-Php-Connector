@@ -66,4 +66,5 @@ return $this; # so you can chain methods
 ```
 > The thirth parameter is optional. If you suppress the ```$operator``` parameter the lib will guess you want to ```Equal``` (=) this entry. The complete list of operator you find out in the REST API docs.
 
+
 Documentation in progress... See the examples folder!
