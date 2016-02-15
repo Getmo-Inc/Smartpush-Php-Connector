@@ -118,12 +118,12 @@ class Push
         return $this->data;
     }
 
-    public function getPushInfo($pushid)
+    public function getInfo($pushid)
     {
         return $this->get('/push/'.$this->devid.'/'.$pushid);
     }
 
-    public function cancelPush($pushid)
+    public function cancel($pushid)
     {
         return $this->put('/push/'.$this->devid.'/'.$pushid.'/cancel');
     }
