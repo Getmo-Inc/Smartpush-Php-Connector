@@ -6,7 +6,7 @@ use stdClass;
 
 class Push
 {
-    private $endpoint = 'http://api.getmo.com.br/push';
+    private $endpoint = 'http://api.getmo.com.br';
 
     private $alias;
     private $devid;
@@ -39,8 +39,12 @@ class Push
 
     public function addNotification($appid, $platform, $params)
     {
-        if (!in_array($platform, ['iOS', 'ANDROID', 'WINDOWS', 'CHROME', 'SAFARI', 'FIREFOX'])) {
+        if (!in_array($platform, ['iOS', 'IOS', 'ANDROID', 'WINDOWS', 'CHROME', 'SAFARI', 'FIREFOX'])) {
             return false;
+        }
+
+        if ($platform == 'IOS') {
+            $platform = 'iOS';
         }
 
         if (!is_object($params)) {
@@ -63,7 +67,7 @@ class Push
 
     public function getNotifications()
     {
-        return $this->notifications;
+        return (isset($this->notifications) && $this->notifications) ? $this->filter->rules : false;
     }
 
     public function addTag($key, $valueOrOperator, $value = false)
@@ -82,7 +86,7 @@ class Push
 
     public function getTags()
     {
-        return $this->filter->rules;
+        return (isset($this->filter->rules) && $this->filter->rules) ? $this->filter->rules : false;
     }
 
     public function getPayload($toJson = true)
@@ -104,7 +108,7 @@ class Push
             return false;
         }
 
-        $this->request($this->makePayload());
+        $this->data = $this->post('/push', $this->makePayload());
 
         return $this;
     }
@@ -112,6 +116,16 @@ class Push
     public function getData()
     {
         return $this->data;
+    }
+
+    public function getPushInfo($pushid)
+    {
+        return $this->get('/'.$this->devid.'/'.$pushid);
+    }
+
+    public function cancelPush($pushid)
+    {
+        return $this->put('/'.$this->devid.'/'.$pushid.'/cancel');
     }
 
     private function validate()
@@ -142,19 +156,42 @@ class Push
         return $payload;
     }
 
-    private function request($payload)
+    private function post($route, $payload = [])
+    {
+        return $this->curl('POST', $route, $payload);
+    }
+
+    private function get($route)
+    {
+        return $this->curl('GET', $route);
+    }
+
+    private function put($route)
+    {
+        return $this->curl('PUT', $route);
+    }
+
+    private function curl($verb, $route, $payload = [])
     {
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_URL, $this->endpoint);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, 'data='.urlencode(json_encode($payload)));
+        curl_setopt($ch, CURLOPT_URL, $this->endpoint.$route);
+
+        switch($verb) {
+            case 'POST':
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, 'data='.urlencode(json_encode($payload)));
+                break;
+            case 'PUT':
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+                break;
+        }
 
         $data = curl_exec($ch);
         curl_close($ch);
 
-        $this->data = $data;
+        return $data;
     }
 }

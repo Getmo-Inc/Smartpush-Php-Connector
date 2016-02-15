@@ -11,7 +11,7 @@ composer require getmo/smartpush-php-connector
 ## Platforms
 Use one of the these platforms when you see ```$platform``` on the docs above.
 ```php
-$platforms = ['iOS', 'ANDROID', 'WINDOWS', 'CHROME', 'SAFARI', 'FIREFOX'];
+$platforms = ['IOS', 'ANDROID', 'WINDOWS', 'CHROME', 'SAFARI', 'FIREFOX'];
 ```
 
 ## Usage
