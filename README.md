@@ -27,18 +27,16 @@ use Smartpush\Push;
 ```php
 $push = new Push(string $devid, string $when = 'now', string $alias = '');
 ```
-> The seconds and thirth parameters are options. The ```$when``` parameter can handle this entry models: 'now', '0000-00-00 00:00:00', '00/00/000 00:00:00', or a valida UNIX timestamp. The ```$alias``` sets a custom name for this Push Notification, so you can track it later on admin.getmo.com.br.
+> The second and thirth parameters are optional. The second ```$when``` parameter can handle this entry models: **'now'**, **'0000-00-00 00:00:00'**, **'00/00/000 00:00:00'**, or a valida UNIX timestamp. The thirth ```$alias``` paramenter sets a custom name for this Push Notification, so you can track it later on control panel.
 
 
-#### Method: setEnvironment()
+#### Method: setEnvironment(string $environment)
 ---
 **Description**: (Optional) Set the environment you want to use to sent this Push Notification. **Example**:
 ```php
-$push->setEnvironment(string $env = '1');
-...
-return $this; # so you can chain methods
+$push->setEnvironment(string $envinronment = '1'); # This method return $this, so you can chain it.
 ```
-> This method is optional. If you dont set the environment, the lib will guess you choose ```production```. If you want to use ```sandbox```, use this method with $env = '0'.
+> This method is optional. If you dont set the environment, the lib will guess you choose ```production```. If you want to use ```sandbox```, use this method with $environment = '0'.
 
 
 #### Method: addNotification()
@@ -128,9 +126,10 @@ $data = json_decode($result);
 echo $data->pushid;
 ```
 
+
 #### Method: getInfo()
 ---
-**Description**: Return a JSON string about the informed Push Notification. **Example**:
+**Description**: Return a JSON string information about the informed Push Notification. **Example**:
 ```php
 $info = $push->getInfo(string $pushid);
 $data = json_decode($info);
@@ -148,14 +147,15 @@ echo $data->{'time-left'};
 echo $data->date;
 ```
 
+
 #### Method: cancel()
 ---
-**Description**: Cancel and return a JSON string about the informed Push Notification. **Example**:
+**Description**: Cancel and return a JSON string information about the informed Push Notification. **Example**:
 ```php
 $push->cancel(string $pushid);
 ...
 $info = $push->cancel(string $pushid);
-# Same result as getInfo() method...
+# Info here get the same result as getInfo() method above.
 ```
 > You can only cancel Push Notifications which were not sent.
 
