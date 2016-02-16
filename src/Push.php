@@ -110,12 +110,17 @@ class Push
 
         $this->data = $this->post('/push', $this->makePayload());
 
-        return $this;
+        return true;
+    }
+
+    public function getResult()
+    {
+        return $this->data;
     }
 
     public function getData()
     {
-        return $this->data;
+        return $this->getResult();
     }
 
     public function getInfo($pushid)

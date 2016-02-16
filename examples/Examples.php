@@ -11,32 +11,35 @@ class Examples
         $push = new Push('CN6Z8Eka3FSQ9IA');
         $push->addNotification('000000000000001', 'ANDROID', $this->getParams());
         $push->addTag('DEVICE_UUID', '353317056832026');
-        $push->send();
-        $data = $push->getData();
 
-        var_dump($data);
+        if ($push->send()) {
+            $data = $push->getResult();
+            var_dump($data);
+        }
     }
 
     public function example2()
     {
-        $data = (new Push('CN6Z8Eka3FSQ9IA'))
+        $push = (new Push('CN6Z8Eka3FSQ9IA'))
             ->addNotification('000000000000001', 'ANDROID', $this->getParams())
-            ->addTag('DEVICE_UUID', '353317056832026')
-            ->send()
-            ->getData();
+            ->addTag('DEVICE_UUID', '353317056832026');
 
-        var_dump($data);
+        if ($push->send()) {
+            $data = $push->getResult();
+            var_dump($data);
+        }
     }
 
     public function example3()
     {
-        $data = (new \Smartpush\Push('CN6Z8Eka3FSQ9IA'))
+        $push = (new \Smartpush\Push('CN6Z8Eka3FSQ9IA'))
             ->addNotification('000000000000001', 'ANDROID', $this->getParams())
-            ->addTag('DEVICE_UUID', '353317056832026')
-            ->send()
-            ->getData();
+            ->addTag('DEVICE_UUID', '353317056832026');
 
-        var_dump($data);
+        if ($push->send()) {
+            $data = $push->getResult();
+            var_dump($data);
+        }
     }
 
     public function example4()

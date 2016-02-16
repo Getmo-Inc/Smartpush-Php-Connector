@@ -54,6 +54,20 @@ return $this; # so you can chain methods
 > The thirth parameter, **$params**, must be an ```array``` or an ```object``` (If you pass in an array the lib will turn it into an object). The content schema variates according the platform. Consult the REST API docs to obtain the correct schema for the platform that you want to target.
 
 
+#### Method: getNotifications()
+---
+**Description**: Return the array of Notifications that you have previously prepared to send. **Example**:
+```php
+$notifications = $push->getNotifications();
+foreach ($notifications as $notification) {
+    echo $notification->appid;
+    echo $notification->platform;
+    var_dump($notification->params);
+}
+```
+> This method can be used to inspect the data inside every notification before sending it.
+
+
 #### Method: addTag()
 ---
 **Description**: Add a Tag to filter the Push Notification. **Example**:
@@ -67,4 +81,56 @@ return $this; # so you can chain methods
 > The thirth parameter is optional. If you suppress the ```$operator``` parameter the lib will guess you want to ```Equal``` (=) this entry. The complete list of operator you find out in the REST API docs.
 
 
-Documentation in progress... See the examples folder!
+#### Method: send()
+---
+**Description**: Send the Push Notification previously configured. If the inputs dont validate this methos will return ```**false**```, otherwise ```**true**```. **Example**:
+```php
+if ($push->send()) {
+    # ...
+} else {
+    # ...
+}
+...
+return $boolean;
+```
+> If this method return ```**false**``` probably you forgot to config a notification or a tag.
+
+
+#### Method: getResult()
+---
+**Description**: Return a JSON string from the server after sending a Push Notification. **Example**:
+```php
+$result = $push->getResult();
+$data = json_decode($result);
+echo $data->pushid;
+```
+
+#### Method: getInfo($pushid)
+---
+**Description**: Return a JSON string about the informed Push Notification. **Example**:
+```php
+$info = $push->getInfo(string $pushid);
+$data = json_decode($info);
+
+var_dump($data->notifications); # array of information about all notifications of this push.
+foreach ($data->notifications as $notification) {
+    echo $notification->appid;
+    echo $notification->status;
+    # if push was sended the follow property will be available.
+    echo $notification->sended_at;
+}
+...
+# if push was configured to be sent at a future moment in time, this two properties will be available.
+echo $data->{'time-left'};
+echo $data->date;
+```
+
+#### Method: cancel()
+---
+**Description**: Cancel and return a JSON string about the informed Push Notification. **Example**:
+```php
+$push->cancel(string $pushid);
+```
+> You can only cancel Push Notifications which were not sent.
+
+Documentation in progress... See the [examples](https://github.com/Getmo-Inc/Smartpush-Php-Connector/blob/master/examples/Examples.php) file!
