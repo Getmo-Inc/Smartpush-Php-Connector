@@ -32,8 +32,9 @@ $push = new Push(string $devid, string $when = 'now', string $alias = '');
 
 
 #### Method: setEnvironment()
+**Description**: (Optional) Set the environment you want to use to sent this Push Notification.
 ---
-**Description**: (Optional) Set the environment you want to use to sent this Push Notification. **Example**:
+**Example**:
 ```php
 $push->setEnvironment(string $envinronment = '1'); # This method return $this, so you can chain it.
 ```
@@ -46,8 +47,9 @@ $this; # so you can chain methods!
 
 
 #### Method: addNotification()
+**Description**: Add a notification to the Push payload.
 ---
-**Description**: Add a notification to the Push payload. **Example**:
+**Example**:
 ```php
 $push->addNotification(string $appid, string $platform, array $params);
 # or
@@ -62,8 +64,9 @@ $this; # so you can chain methods!
 
 
 #### Method: getNotifications()
+**Description**: (Optional) Return an array of Notifications that you have previously configured to send.
 ---
-**Description**: Return an array of Notifications that you have previously configured to send. **Example**:
+**Example**:
 ```php
 $notifications = $push->getNotifications();
 foreach ($notifications as $notification) {
@@ -81,8 +84,9 @@ array; # of objects
 
 
 #### Method: addTag()
+**Description**: Add a Tag to filter the Push Notification devices.
 ---
-**Description**: Add a Tag to filter the Push Notification devices. **Example**:
+**Example**:
 ```php
 $push->addTag(string $key, string $value);
 # or
@@ -97,8 +101,9 @@ $this; # so you can chain methods!
 
 
 #### Method: getTags()
+**Description**: (Optional) Return an ```array``` of Tags that you have previously configured to send. 
 ---
-**Description**: Return an ```array``` of Tags that you have previously configured to send. **Example**:
+**Example**:
 ```php
 $tags = $push->getTags();
 foreach ($tags as $tag) {
@@ -114,8 +119,9 @@ array; # of tags
 
 
 #### Method: getPayload()
+**Description**: (Optional) Return the complete payload that you have previously configured to send. If you pass ```**true**``` in the first parameter, the method will return a JSON string, otherwise an array.
 ---
-**Description**: Return the complete payload that you have previously configured to send. If you pass ```**true**``` in the first parameter, the method will return a JSON string, otherwise an array. **Example**:
+**Example**:
 ```php
 var_dump($this->getPayload()); # array
 # or
@@ -130,8 +136,9 @@ var_dump($this->getPayload(true)); # JSON string
 
 
 #### Method: send()
+**Description**: Send the Push Notification previously configured. If the inputs dont validate this methos will return ```**false**```, otherwise ```**true**```.
 ---
-**Description**: Send the Push Notification previously configured. If the inputs dont validate this methos will return ```**false**```, otherwise ```**true**```. **Example**:
+**Example**:
 ```php
 if ($push->send()) {
     # ...
@@ -148,8 +155,9 @@ true || false;
 
 
 #### Method: getResult()
+**Description**: Grab the server response after send a Push Notification. One of the most important information that returns in the JSON string is the **pushid**.
 ---
-**Description**: Grab the server response after send a Push Notification. One of the most important information that returns in the JSON string is the **pushid**. **Example**:
+**Example**:
 ```php
 $result = $push->getResult();
 $data = json_decode($result);
@@ -162,8 +170,9 @@ echo $data->pushid;
 
 
 #### Method: getInfo()
+**Description**: Consult server for the status (and more information) about a Push Notification.
 ---
-**Description**: Consult server for the status (and more information) about a Push Notification. **Example**:
+**Example**:
 ```php
 $info = $push->getInfo(string $pushid);
 $data = json_decode($info);
@@ -187,8 +196,9 @@ echo $data->date;
 
 
 #### Method: cancel()
+**Description**: Cancel and Consult server for the status (and more information) about a Push Notification.
 ---
-**Description**: Cancel and return a JSON string information about the informed Push Notification. **Example**:
+**Example**:
 ```php
 $push->cancel(string $pushid);
 # or
