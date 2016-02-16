@@ -56,7 +56,7 @@ return $this; # so you can chain methods
 
 #### Method: getNotifications()
 ---
-**Description**: Return the array of Notifications that you have previously prepared to send. **Example**:
+**Description**: Return an array of Notifications that you have previously configured to send. **Example**:
 ```php
 $notifications = $push->getNotifications();
 foreach ($notifications as $notification) {
@@ -79,6 +79,31 @@ $push->addTag(string $key, string $operator, string $value);
 return $this; # so you can chain methods
 ```
 > The thirth parameter is optional. If you suppress the ```$operator``` parameter the lib will guess you want to ```Equal``` (=) this entry. The complete list of operator you find out in the REST API docs.
+
+
+#### Method: getTags()
+---
+**Description**: Return an array of Tags that you have previously configured to send. **Example**:
+```php
+$tags = $push->getTags();
+foreach ($tags as $tag) {
+    var_dump($tags);
+}
+```
+> This method can be used to inspect the data inside every notification before sending it.
+
+
+#### Method: getPayload()
+---
+**Description**: Return the complete payload that you have previously configured to send. If you pass ```**true**``` in the first parameter, the method will return a JSON string, otherwise an array. **Example**:
+```php
+$payload = $this->getPayload();
+var_dump($payload); # array
+...
+$payload = $this->getPayload(true);
+echo $payload; # JSON string
+```
+> This method can be used to inspect the data inside every notification before sending it.
 
 
 #### Method: send()
@@ -128,7 +153,16 @@ echo $data->date;
 **Description**: Cancel and return a JSON string about the informed Push Notification. **Example**:
 ```php
 $push->cancel(string $pushid);
+...
+$info = $push->cancel(string $pushid);
+# Same result as getInfo() method...
 ```
 > You can only cancel Push Notifications which were not sent.
 
-Documentation in progress... See the [examples](https://github.com/Getmo-Inc/Smartpush-Php-Connector/blob/master/examples/Examples.php) file!
+
+### Support
+Jonathan Martins
+webmaster@getmo.com.br
+---
+
+> Developed by Getmo
