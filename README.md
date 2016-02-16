@@ -22,8 +22,10 @@ use Smartpush\Push;
 ```
 
 #### Class: Push
+
+**Description**: Create a new push instance.
 ---
-**Description**: Create a new push instance. **Example**:
+**Example**:
 ```php
 $push = new Push(string $devid, string $when = 'now', string $alias = '');
 ```
@@ -32,6 +34,7 @@ $push = new Push(string $devid, string $when = 'now', string $alias = '');
 
 
 #### Method: setEnvironment()
+
 **Description**: (Optional) Set the environment you want to use to sent this Push Notification.
 ---
 **Example**:
@@ -47,6 +50,7 @@ $this; # so you can chain methods!
 
 
 #### Method: addNotification()
+
 **Description**: Add a notification to the Push payload.
 ---
 **Example**:
@@ -64,6 +68,7 @@ $this; # so you can chain methods!
 
 
 #### Method: getNotifications()
+
 **Description**: (Optional) Return an array of Notifications that you have previously configured to send.
 ---
 **Example**:
@@ -84,6 +89,7 @@ array; # of objects
 
 
 #### Method: addTag()
+
 **Description**: Add a Tag to filter the Push Notification devices.
 ---
 **Example**:
@@ -101,6 +107,7 @@ $this; # so you can chain methods!
 
 
 #### Method: getTags()
+
 **Description**: (Optional) Return an ```array``` of Tags that you have previously configured to send. 
 ---
 **Example**:
@@ -119,6 +126,7 @@ array; # of tags
 
 
 #### Method: getPayload()
+
 **Description**: (Optional) Return the complete payload that you have previously configured to send. If you pass ```**true**``` in the first parameter, the method will return a JSON string, otherwise an array.
 ---
 **Example**:
@@ -136,6 +144,7 @@ var_dump($this->getPayload(true)); # JSON string
 
 
 #### Method: send()
+
 **Description**: Send the Push Notification previously configured. If the inputs dont validate this methos will return ```**false**```, otherwise ```**true**```.
 ---
 **Example**:
@@ -155,6 +164,7 @@ true || false;
 
 
 #### Method: getResult()
+
 **Description**: Grab the server response after send a Push Notification. One of the most important information that returns in the JSON string is the **pushid**.
 ---
 **Example**:
@@ -170,6 +180,7 @@ echo $data->pushid;
 
 
 #### Method: getInfo()
+
 **Description**: Consult server for the status (and more information) about a Push Notification.
 ---
 **Example**:
@@ -196,6 +207,7 @@ echo $data->date;
 
 
 #### Method: cancel()
+
 **Description**: Cancel and Consult server for the status (and more information) about a Push Notification.
 ---
 **Example**:
