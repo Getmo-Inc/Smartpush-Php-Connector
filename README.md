@@ -90,8 +90,6 @@ if ($push->send()) {
 } else {
     # ...
 }
-...
-return $boolean;
 ```
 > If this method return ```**false**``` probably you forgot to config a notification or a tag.
 
@@ -105,7 +103,7 @@ $data = json_decode($result);
 echo $data->pushid;
 ```
 
-#### Method: getInfo($pushid)
+#### Method: getInfo()
 ---
 **Description**: Return a JSON string about the informed Push Notification. **Example**:
 ```php
