@@ -227,8 +227,8 @@ $info = $push->cancel(string $pushid);
 
 ### Support
 
-Jonathan Martins [Contact]
-(webmaster@getmo.com.br)
+Jonathan Martins
+webmaster@getmo.com.br
 ---
 
 > Developed by Getmo
