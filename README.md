@@ -127,7 +127,7 @@ array; # of tags
 
 #### Method: getPayload()
 ---
-**Description**: (Optional) Return the complete payload that you have previously configured to send. If you pass ```**true**``` in the first parameter, the method will return a JSON string, otherwise an array.
+**Description**: (Optional) Return the complete payload that you have previously configured to send. If you pass ```true``` in the first parameter, the method will return a JSON string, otherwise an array.
 
 **Example**:
 ```php
@@ -145,7 +145,7 @@ var_dump($this->getPayload(true)); # JSON string
 
 #### Method: send()
 ---
-**Description**: Send the Push Notification previously configured. If the inputs dont validate this methos will return ```**false**```, otherwise ```**true**```.
+**Description**: Send the Push Notification previously configured. If the inputs dont validate this methos will return ```false```, otherwise ```true```.
 
 **Example**:
 ```php
@@ -160,7 +160,7 @@ if ($push->send()) {
 true || false;
 ```
  
-> If this method return ```**false**``` probably you forgot to config a notification or a tag.
+> If this method return ```false``` probably you forgot to config a notification or a tag.
 
 
 #### Method: getResult()
