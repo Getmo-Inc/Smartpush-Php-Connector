@@ -193,7 +193,7 @@ foreach ($data->notifications as $notification) {
     echo $notification->appid;
     echo $notification->status;
     # if push was sent the follow property will be available.
-    echo $notification->sended_at;
+    echo $notification->sent_at;
 }
 ...
 # if push was configured to be sent at a future moment in time, this two properties will be available.
