@@ -87,6 +87,33 @@ array; # of objects
 
 > This method can be used to inspect the Notifications data inside the Push object before sending.
 
+#### Method: setFilterRange()
+---
+**Description**: (Optional) Set the range days of which the filter will operate when the job is processed. The $range value can be one of there: `7`, `15`, `30`, `60`, `90`, `all`, otherwise it will fallback to default: `all`.
+
+**Example**:
+```php
+$push->setFilterRange(string $range);
+```
+**Return**:
+```php
+$this; # so you can chain methods! 
+```
+
+
+#### Method: setFilterOperator()
+---
+**Description**: (Optional) Set the operator of which the filter will use to do comparisons. The $operator value can be one of there: `AND`, `OR`, otherwise it will fallback to default: `AND`.
+
+**Example**:
+```php
+$push->setFilterOperator(string $operator);
+```
+**Return**:
+```php
+$this; # so you can chain methods! 
+```
+
 
 #### Method: addTag()
 ---
@@ -96,14 +123,14 @@ array; # of objects
 ```php
 $push->addTag(string $key, string $value);
 # or
-$push->addTag(string $key, string $operator, string $value);
+$push->addTag(string $key, string $comparator, string $value);
 ```
 **Return**:
 ```php
 $this; # so you can chain methods! 
 ```
 
-> The thirth parameter is optional. If you suppress the ```$operator``` parameter the lib will guess you want to ```Equal``` (=) this entry. The complete list of operator you find out in the REST API docs.
+> The thirth parameter is optional. If you suppress the ```$comparator``` parameter the lib will guess you want to ```Equal``` (=) this entry. The complete list of comparators you find out in the REST API docs.
 
 
 #### Method: getTags()
