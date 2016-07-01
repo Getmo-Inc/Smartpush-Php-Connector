@@ -25,6 +25,8 @@ class Push
 
         $this->filter = new stdClass;
         $this->filter->type = "TAG";
+        $this->filter->range = 'all';
+        $this->filter->operator = 'AND';
         $this->filter->rules = [];
 
         return $this;
@@ -68,6 +70,36 @@ class Push
     public function getNotifications()
     {
         return (isset($this->notifications) && $this->notifications) ? $this->filter->rules : false;
+    }
+
+    public function setFilterRange($range)
+    {
+        switch ($range) {
+            case '7':
+            case '15':
+            case '30':
+            case '60':
+            case '90':
+            case 'all':
+                $this->filter->range = $range;
+                break;
+            default:
+                $this->filter->range = 'all';
+        }
+        return $this;
+    }
+
+    public function setFilterOperator($operator)
+    {
+        switch ($operator) {
+            case 'AND':
+            case 'OR':
+                $this->filter->operator = $operator;
+                break;
+            default:
+                $this->filter->operator = 'AND';
+        }
+        return $this;
     }
 
     public function addTag($key, $valueOrOperator, $value = false)
@@ -180,17 +212,29 @@ class Push
     {
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_URL, $this->endpoint.$route);
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => $this->endpoint.$route
+        ]);
 
         switch($verb) {
             case 'POST':
-                curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, 'data='.urlencode(json_encode($payload)));
+                $json = json_encode($payload);
+                curl_setopt_array($ch, [
+                        CURLOPT_POST => 1,
+                        CURLOPT_POSTFIELDS => $json,
+                        CURLOPT_HEADER => 1,
+                        CURLOPT_HTTPHEADER => [
+                            'Content-Type:application/json',
+                            'Content-Length: ' . strlen($json)
+                        ]
+                ]);
                 break;
             case 'PUT':
-                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+                curl_setopt_array($ch, [
+                    CURLOPT_HEADER => 0,
+                    CURLOPT_CUSTOMREQUEST => 'PUT'
+                ]);
                 break;
         }
 
