@@ -102,16 +102,16 @@ class Push
         return $this;
     }
 
-    public function addTag($key, $valueOrOperator, $value = false)
+    public function addTag($key, $valueOrComparator, $value = false)
     {
         if ($value) {
-            $operator = $valueOrOperator == 'EQ' ? '=' : $valueOrOperator;
+            $comparator = $valueOrComparator == 'EQ' ? '=' : $valueOrComparator;
         } else {
-            $operator = '=';
-            $value = $valueOrOperator;
+            $comparator = '=';
+            $value = $valueOrComparator;
         }
 
-        array_push($this->filter->rules, [$key, $operator, $value]);
+        $this->filter->rules[] = [$key, $comparator, $value];
 
         return $this;
     }
