@@ -19,9 +19,10 @@ Import the Push class into your project.
 
 ```php
 use Smartpush\Push;
+use Smartpush\Notification; // optional, use only if you will consult data from server
 ```
 
-#### Class: Push
+### Class: Push
 ---
 **Description**: Create a new push instance.
 
@@ -158,9 +159,9 @@ array; # of tags
 
 **Example**:
 ```php
-var_dump($this->getPayload()); # array
+var_dump($push->getPayload()); # array
 # or
-var_dump($this->getPayload(true)); # JSON string
+var_dump($push->getPayload(true)); # JSON string
 ```
 **Return**:
 ```php
@@ -252,10 +253,112 @@ $info = $push->cancel(string $pushid);
 > You can only cancel Push Notifications which were not sent.
 
 
+#### Method: hide().
+---
+**Description**: Cancel and Consult server for the status (and more information) about a Push Notification.
+
+**Example**:
+```php
+$push->hide(string $pushid);
+# or
+$info = $push->hide(string $pushid);
+# Here, $info get the same result as getInfo() mention above.
+```
+**Return**:
+```php
+'{...}'; # JSON string
+```
+
+
+### Class: Notification
+---
+**Description**: Create a new notification instance.
+
+**Example**:
+```php
+$notification = new Notification(string $devid, string $appid, string $platform);
+```
+
+
+#### Method: getLastNotifications()
+---
+**Description**: Get the last ten (10) notifications of a specific `hwid`. 
+
+**Example**:
+```php
+$result = $notification->getLastNotifications(string $hwid, array $options);
+```
+**Return**:
+```php
+'{...}'; # JSON string
+```
+
+> The second parameter, **$options**, is optional. It must be an ```array``` and can have the following keys: `show`, `startingDate`, `dateFormat`. Consult the REST API docs to get more information about there optional arguments.
+
+
+#### Method: getLastUnreadNotifications()
+---
+**Description**: Get the last ten (10) unread notifications of a specific `hwid` (device). 
+
+**Example**:
+```php
+$result = $notification->getLastUnreadNotifications(string $hwid, array $options);
+```
+**Return**:
+```php
+'{...}'; # JSON string
+```
+
+> The second parameter, **$options**, is optional. It must be an ```array``` and can have the following keys: `show`, `startingDate`, `dateFormat`. Consult the REST API docs to get more information about there optional arguments.
+
+
+#### Method: getExtraPayload()
+---
+**Description**: Get the extra payload for a specific `pushid`. 
+
+**Example**:
+```php
+$result = $notification->getExtraPayload(string $pushid);
+```
+**Return**:
+```php
+'{...}'; # JSON string
+```
+
+
+#### Method: readOneNotification()
+---
+**Description**: Mark one Push Notification as READ for a specific `hwid` (device). 
+
+**Example**:
+```php
+$notification->readOneNotification(string $hwid, string $pushid);
+```
+
+
+#### Method: readAllNotifications()
+---
+**Description**: Mark all Push Notifications as READ for a specific `hwid` (device). 
+
+**Example**:
+```php
+$notification->readAllNotifications(string $hwid);
+```
+
+#### Method: hideHwidNotification()
+---
+**Description**: Hide one Push Notification for a specific `hwid` (device). 
+
+**Example**:
+```php
+$notification->hideHwidNotification(string $hwid, string $pushid);
+```
+
+
+
 ### Support
 
-Jonathan Martins
-webmaster@getmo.com.br
+Jonathan Martins, `webmaster@getmo.com.br`
 ---
 
 > Developed by Getmo

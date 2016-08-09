@@ -3,11 +3,10 @@
 namespace Smartpush;
 
 use stdClass;
+use Smartpush\Services\Http AS HttpService;
 
-class Push
+class Push extends HttpService
 {
-    private $endpoint = 'http://api.getmo.com.br';
-
     private $alias;
     private $devid;
     private $when;
@@ -165,6 +164,11 @@ class Push
         return $this->put('/push/'.$this->devid.'/'.$pushid.'/cancel');
     }
 
+    public function hide($pushid)
+    {
+        return $this->put('/push/'.$this->devid.'/'.$pushid.'/hide');
+    }
+
     private function validate()
     {
         if (!count($this->notifications)) {
@@ -191,56 +195,5 @@ class Push
         $payload->filter = $this->filter;
 
         return $payload;
-    }
-
-    private function post($route, $payload = [])
-    {
-        return $this->curl('POST', $route, $payload);
-    }
-
-    private function get($route)
-    {
-        return $this->curl('GET', $route);
-    }
-
-    private function put($route)
-    {
-        return $this->curl('PUT', $route);
-    }
-
-    private function curl($verb, $route, $payload = [])
-    {
-        $ch = curl_init();
-
-        curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_URL => $this->endpoint.$route
-        ]);
-
-        switch($verb) {
-            case 'POST':
-                $json = json_encode($payload);
-                curl_setopt_array($ch, [
-                        CURLOPT_POST => 1,
-                        CURLOPT_POSTFIELDS => $json,
-                        CURLOPT_HEADER => 1,
-                        CURLOPT_HTTPHEADER => [
-                            'Content-Type:application/json',
-                            'Content-Length: ' . strlen($json)
-                        ]
-                ]);
-                break;
-            case 'PUT':
-                curl_setopt_array($ch, [
-                    CURLOPT_HEADER => 0,
-                    CURLOPT_CUSTOMREQUEST => 'PUT'
-                ]);
-                break;
-        }
-
-        $data = curl_exec($ch);
-        curl_close($ch);
-
-        return $data;
     }
 }
